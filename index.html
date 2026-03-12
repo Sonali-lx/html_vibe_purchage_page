@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purchase Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+  <h1>Purchase</h1>
+  <div class="header-controls">
+    <input type="text" placeholder="Search products..." />
+    <button class="scan-btn" onclick="openQRScanner()">Scan QR</button>
+  </div>
+</header>
+
+
+
+  <!-- MAIN CONTENT -->
+  <main>
+  <!-- Suggestions Section -->
+  <section class="suggestions">
+    <h2>Suggestions Based on Your Purchases</h2>
+    <div class="product-list" id="productSuggestions">
+
+      <!-- Existing 4 Products -->
+      <div class="product">
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQTR3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1687660671097" alt="Wireless Headphones" />
+        <h3>Wireless Headphones</h3>
+        <p class="desc">Noise-cancelling over-ear headphones with 40h battery life.</p>
+        <p class="price">₹2,499</p>
+        <button onclick="startPurchase('Wireless Headphones')">Buy</button>
+      </div>
+
+      <div class="product">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.G2HsNbKATN91lNxqnc2aUQHaHa?r=0&w=1200&h=1200&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Smart Watch" />
+        <h3>Smart Watch</h3>
+        <p class="desc">Track your fitness & notifications with AMOLED display.</p>
+        <p class="price">₹1,999</p>
+        <button onclick="startPurchase('Smart Watch')">Buy</button>
+      </div>
+
+      <div class="product">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.StvaWkNmC44w6q8mXXzerQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bluetooth Speaker" />
+        <h3>Bluetooth Speaker</h3>
+        <p class="desc">Portable bass-boosted speaker with 12h playtime.</p>
+        <p class="price">₹999</p>
+        <button onclick="startPurchase('Bluetooth Speaker')">Buy</button>
+      </div>
+
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61-4y5sDyxS._AC_SL1500_.jpg" alt="Phone Stand" />
+        <h3>Adjustable Phone Stand</h3>
+        <p class="desc">Foldable stand for desk use with multiple angles.</p>
+        <p class="price">₹399</p>
+        <button onclick="startPurchase('Phone Stand')">Buy</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Available Products Section -->
+  <section class="suggestions">
+    <h2>Available Products</h2>
+    <div class="product-list">
+
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/6151FHj0mjL._SL1500_.jpg" alt="USB Desk Fan" />
+        <h3>USB Desk Fan</h3>
+        <p class="desc">Quiet, compact, and portable USB-powered cooling fan.</p>
+        <p class="price">₹699</p>
+        <button onclick="startPurchase('USB Desk Fan')">Buy</button>
+      </div>
+
+      <div class="product">
+        <img src="https://i5.walmartimages.com/seo/DESTYER-LED-Desktop-Lamp-Flexible-Foldable-Eye-Protection-Table-Lamp-Students-Books-Reading-Light-blue_262193ba-f08b-412d-973d-ead7d124e01f.210f0eb6aa606ef039be2608603ee0bf.jpeg" alt="Mini LED Desk Lamp" />
+        <h3>Mini LED Desk Lamp</h3>
+        <p class="desc">Touch-sensitive lamp with 3 brightness levels.</p>
+        <p class="price">₹549</p>
+        <button onclick="startPurchase('Mini LED Desk Lamp')">Buy</button>
+      </div>
+
+      <div class="product">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.ImP0aC5kmpRRHC9UbV3CsQHaHa?r=0&w=1000&h=1000&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Wireless Mouse" />
+        <h3>Wireless Mouse</h3>
+        <p class="desc">Ergonomic wireless mouse with silent clicks.</p>
+        <p class="price">₹799</p>
+        <button onclick="startPurchase('Wireless Mouse')">Buy</button>
+      </div>
+
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81WclVePxES.jpg" alt="Laptop Cooling Pad" />
+        <h3>Laptop Cooling Pad</h3>
+        <p class="desc">Multi-angle pad with LED fans for heat control.</p>
+        <p class="price">₹1,299</p>
+        <button onclick="startPurchase('Laptop Cooling Pad')">Buy</button>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+
+  <!-- INTENT MODAL -->
+  <div class="intent-popup" id="intentPopup">
+    <label for="intentInput">Why do you want to buy this?</label>
+    <input type="text" id="intentInput" placeholder="Your intent..." />
+    <button onclick="confirmPurchase()">Confirm Purchase</button>
+  </div>
+
+  <!-- QR MODAL -->
+  <div id="qrScannerModal" class="modal">
+    <video id="qrVideo" autoplay></video>
+    <button onclick="closeQRScanner()">Close</button>
+  </div>
+
+  <!-- JS (you can link to external .js too) -->
+  <script>
+    let currentProduct = '';
+
+    function startPurchase(productName) {
+      currentProduct = productName;
+      document.getElementById("intentPopup").style.display = "block";
+    }
+
+    function confirmPurchase() {
+      const intent = document.getElementById("intentInput").value;
+      if (intent.trim() === "") {
+        alert("Please enter your purchase intent.");
+        return;
+      }
+      alert(`You have confirmed to purchase "${currentProduct}" with intent: "${intent}"`);
+      document.getElementById("intentPopup").style.display = "none";
+      document.getElementById("intentInput").value = "";
+    }
+
+    function openQRScanner() {
+      document.getElementById("qrScannerModal").style.display = "block";
+    }
+
+    function closeQRScanner() {
+      document.getElementById("qrScannerModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
