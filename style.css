@@ -1,0 +1,200 @@
+/* ------------------ ROOT COLORS ------------------ */
+:root {
+  --bg: #FBFBFB;
+  --fg: #1e293b;
+  --card: #FFF;
+  --primary: #FFDDAE;
+  --secondary: #D4F6FF;
+  --muted: #C6E7FF;
+  --muted-fg: #475569;
+  --radius: 0.5rem;
+}
+
+/* ------------------ BASE ------------------ */
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+h1, h2 {
+  text-align: center;
+  color: var(--fg);
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+/* ------------------ HEADER ------------------ */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--fg);
+  color: #fff;
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.8rem;
+  color: #fff;
+}
+
+.header-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.header-controls input[type="text"] {
+  padding: 0.6rem;
+  min-width: 200px;
+  flex-grow: 1;
+  background: var(--muted);
+  color: var(--fg);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+}
+
+header button, .intent-popup button, .modal button {
+  background: var(--primary);
+  color: var(--fg);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header button:hover,
+.intent-popup button:hover,
+.modal button:hover {
+  background: #fcb85c;
+}
+
+/* ------------------ PRODUCTS ------------------ */
+.product-list {
+  display: grid;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.product {
+  background: var(--card);
+  border: 1px solid var(--muted);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.product img {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
+}
+
+.product h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.product .desc {
+  font-size: 0.85rem;
+  color: var(--muted-fg);
+  margin-bottom: 0.3rem;
+}
+
+.product .price {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.product button {
+  background: var(--secondary);
+  color: var(--fg);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.product button:hover {
+  background: #bdeeff;
+}
+
+/* ------------------ MODALS ------------------ */
+.intent-popup, .modal {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  border: 2px solid var(--muted);
+  border-radius: var(--radius);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  z-index: 10;
+  padding: 2rem;
+  display: none;
+}
+
+.intent-popup {
+  top: 30%;
+  width: 300px;
+}
+
+.intent-popup input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+  background: var(--muted);
+  color: var(--fg);
+}
+
+.modal {
+  top: 10%;
+  width: 80%;
+  max-width: 500px;
+  background: var(--fg);
+  color: #fff;
+}
+
+.modal video {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .intent-popup, .modal {
+    width: 90%;
+    left: 5%;
+    transform: translate(0);
+  }
+}
